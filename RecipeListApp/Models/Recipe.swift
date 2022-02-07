@@ -5,6 +5,8 @@ import SwiftUI
 
 class Recipe: Identifiable, Decodable {
 
+    
+
     var id:UUID?
     var name: String
     var featured: Bool
