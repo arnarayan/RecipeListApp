@@ -13,16 +13,18 @@ struct RecipeListView: View {
     
     var body: some View {
         ScrollView{
-            ForEach(model.recipes) { r in
-                HStack(){
-                    Image(r.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50, alignment: .center)
-                        .clipped()
-                        .cornerRadius(5)
-                    Text(r.name)
-                        .multilineTextAlignment(.leading)
+            VStack(alignment: .leading) {
+                ForEach(model.recipes) { r in
+                    HStack(){
+                        Image(r.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 50, alignment: .center)
+                            .clipped()
+                            .cornerRadius(5)
+                        Text(r.name)
+                            .multilineTextAlignment(.leading)
+                    }
                 }
             }
         }
