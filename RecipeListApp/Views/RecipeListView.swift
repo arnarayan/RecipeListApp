@@ -12,21 +12,23 @@ struct RecipeListView: View {
     @ObservedObject var model = RecipeModel()
     
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading) {
-                ForEach(model.recipes) { r in
-                    HStack(){
-                        Image(r.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50, alignment: .center)
-                            .clipped()
-                            .cornerRadius(5)
-                        Text(r.name)
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-            }
+        NavigationView {
+                List(model.recipes) { r in
+                    NavigationLink(destination: RecipeDetailView(recipe: r), label: {
+                        HStack(){
+                            Image(r.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50, alignment: .center)
+                                .clipped()
+                                .cornerRadius(5)
+                            Text(r.name)
+                                .multilineTextAlignment(.leading)
+                        }
+                        
+                    })
+
+                }.navigationBarTitle("All Recipes")
         }
     }
 }
