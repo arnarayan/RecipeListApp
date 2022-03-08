@@ -13,28 +13,45 @@ struct RecipeListView: View {
     
     var body: some View {
         NavigationView {
-                List(model.recipes) { r in
-                    NavigationLink(destination: RecipeDetailView(recipe: r), label: {
-                        HStack(){
-                            Image(r.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50, alignment: .center)
-                                .clipped()
-                                .cornerRadius(5)
-                            Text(r.name)
-                                .multilineTextAlignment(.leading)
-                        }
-                        
-                    })
+            VStack(alignment: .leading){
+                Text("All Recipes")
+                    .bold()
+                    .padding([.top, .leading])
+                    .font(.largeTitle)
+                ScrollView{
+                    LazyVStack(alignment: .leading) {
+                        ForEach(model.recipes) { r in
+                            NavigationLink(destination: RecipeDetailView(recipe: r), label: {
+                                HStack(){
+                                    Image(r.image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50, alignment: .center)
+                                        .clipped()
+                                        .cornerRadius(5)
+                                    Text(r.name)
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.black)
+                                }
+                                
+                            })
 
-                }.navigationBarTitle("All Recipes")
+                        }
+                    }
+                    .padding()
+
+                }
+
+            }.navigationBarHidden(true)
+
+                
+                
         }
     }
 }
 
 struct RecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeListView()
+        RecipeListView().environmentObject(RecipeModel())
     }
 }
