@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     var recipe: Recipe
-    
+    @State var selectedServingSize = 2
     var body: some View {
         
         
@@ -22,11 +22,29 @@ struct RecipeDetailView: View {
                 .padding(.bottom, 1.0)
                 
                 
+                VStack(alignment:.leading){
+                    Text("select your servings").font(.footnote)
+                    Picker("", selection: $selectedServingSize) {
+                        Text("2").tag(2)
+                        Text("4").tag(4)
+                        Text("6").tag(6)
+                        Text("8").tag(8)
+                    }.pickerStyle(.segmented)
+                        .frame(width: 150, height: 25, alignment: .center)
+                }.padding()
+                
+                
                 VStack(alignment: .leading) {
+                    
                     Text("Ingredients").font(.headline).padding([.leading, .bottom], 2.0)
                     ForEach(recipe.ingredients) { ingredient in
-                        Text("* " + ingredient.name)
-                            .padding([.leading, .bottom], 1.0)
+                        HStack(alignment:.bottom, spacing: 0) {
+                            Text("- \(String(RecipeModel.calculatePortion(recipeServings: recipe.servings, targetServings: selectedServingSize, ingredient: ingredient)))")
+                            Text(" \(ingredient.name.lowercased())")
+                        }.padding([.leading, .bottom], 1.0)
+                        .font(.footnote)
+
+
                     }
                 }
                 .padding(.horizontal, 10.0)
