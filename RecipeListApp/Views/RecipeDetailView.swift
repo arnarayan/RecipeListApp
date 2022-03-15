@@ -21,6 +21,10 @@ struct RecipeDetailView: View {
 
                 .padding(.bottom, 1.0)
                 
+                Text(recipe.name)
+                    .bold()
+                    .padding([.leading])
+                    .font(.largeTitle)
                 
                 VStack(alignment:.leading){
                     Text("select your servings").font(.footnote)
@@ -31,7 +35,7 @@ struct RecipeDetailView: View {
                         Text("8").tag(8)
                     }.pickerStyle(.segmented)
                         .frame(width: 150, height: 25, alignment: .center)
-                }.padding()
+                }.padding([.leading])
                 
                 
                 VStack(alignment: .leading) {
@@ -46,8 +50,7 @@ struct RecipeDetailView: View {
 
 
                     }
-                }
-                .padding(.horizontal, 10.0)
+                }.padding(.horizontal, 10.0)
 
                 Divider()
                 VStack(alignment: .leading) {
@@ -61,7 +64,7 @@ struct RecipeDetailView: View {
  
             }
 
-        }.navigationTitle(recipe.name)
+        }
         
     }
 }
